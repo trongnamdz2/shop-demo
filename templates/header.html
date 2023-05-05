@@ -1,0 +1,21 @@
+<header class="group">
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}" class="logo">Logo</a></li>
+            <li>
+                <form action="{% url 'home' %}" method="get">
+                    <input type="text" name="search">
+                    <button type="submit">Search</button>
+                </form>
+            </li>
+            {% if request.user.is_authenticated %}
+                <li><p>Welcome, {{request.user}}</p></li>
+                <li><a href="{% url 'logout' %}" class="func-button">Dang xuat</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}" class="func-button">Dang nhap</a></li>
+                <li><a href="{% url 'register' %}" class="func-button">Dang ky</a></li>
+            {% endif %}
+            <li><a href="">Cart</a></li>
+        </ul>
+    </nav>
+</header>

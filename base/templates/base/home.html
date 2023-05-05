@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Trang Chủ</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1>San pham moi nhat</h1>
+    {% for item in new_item %}
+        <div class="item-container">
+            <img src="{{item.thumbnail.url}}" alt="" class="thumbnail">
+            <p>{{item.title}}</p>
+            <p>{{item.price}}</p>
+            <form action="" method="get">
+                <button type="submit" name="cart" value="{{item.id}}">Thêm vào giỏ hàng</button>
+            </form>
+            <a href="{% url 'detail' item.id %}">Xem Thêm</a>
+        </div>
+    {% endfor %}
+</body>
+</html>
