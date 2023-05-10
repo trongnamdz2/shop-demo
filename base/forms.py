@@ -4,8 +4,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 class LoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput, required=True, label='Tài khoản')
-    password = forms.CharField(widget=forms.PasswordInput, label='Mật khẩu')
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'username-input',
+        'placeholder': 'Tài khoản'
+    }), required=True, label='username')
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': 'password-input',
+        'placeholder': 'Mật khẩu'
+    }), label='password')
+
 
     def clean(self):
         super(LoginForm, self).clean()
@@ -21,11 +28,26 @@ class LoginForm(forms.Form):
     
 
 class RegisterForm (forms.Form):
-    first_name = forms.CharField(max_length=50, required=True, label='Tên')
-    last_name = forms.CharField(max_length=50, required=True, label='Họ')
-    username = forms.CharField(max_length=100, required=True, label='Tài khoản')
-    password = forms.CharField(widget=forms.PasswordInput, required=True, max_length=100, label='Mật khẩu')
-    confirm_password = forms.CharField(widget=forms.PasswordInput, required=True, max_length=100, label='Mật khẩu xác nhận')
+    first_name = forms.CharField(label='fa fa-address-card' ,max_length=50, required=True, widget=forms.TextInput(attrs={
+        'class': 'register-input',
+        'placeholder': 'Tên'
+    }))
+    last_name = forms.CharField(label='fa fa-address-card' ,max_length=50, required=True, widget=forms.TextInput(attrs={
+        'class': 'register-input',
+        'placeholder': 'Họ'
+    }))
+    username = forms.CharField(label='fa fa-user' ,max_length=100, required=True, widget=forms.TextInput(attrs={
+        'class': 'register-input',
+        'placeholder': 'Tài khoản'
+    }))
+    password = forms.CharField(label='fa fa-key' ,widget=forms.PasswordInput(attrs={
+        'placeholder': 'Mật khẩu',
+        'class': 'register-input'
+    }), required=True, max_length=100)
+    confirm_password = forms.CharField(label='fa fa-key' ,widget=forms.PasswordInput(attrs={
+        'placeholder': 'Mật khẩu xác nhận',
+        'class': 'register-input'
+    }), required=True, max_length=100)
 
     def clean(self):
         super(RegisterForm, self).clean()

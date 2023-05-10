@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 
 from .forms import LoginForm, RegisterForm
 
-from .models import Item
+from .models import Item, UserExtend, Images
 
 from django.contrib.auth import authenticate, login
 
@@ -59,6 +59,8 @@ class Register(View):
             register.save()
             user = authenticate(username=username, password=password)
             if user is not None:
+                new_user = UserExtend(user=user)
+                new_user.save()
                 login(request, user)
                 return redirect('home')
 
@@ -88,6 +90,8 @@ class HomePage(View):
 class ItemDetail(View):
     def get(self, request, pk):
         item = Item.objects.get(id=pk)
+        item_image = Images.objects.filter(item=item)
         return render(request, 'base/detail.html', {
-            'item': item
+            'item': item,
+            'images': item_image
         })

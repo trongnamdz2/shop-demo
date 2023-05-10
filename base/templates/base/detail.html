@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>{{item.title}}</title>
 </head>
 <body>
     {% include 'header.html' %}
-    {{item.title}}
+    <img src="{{item.thumbnail.url}}" alt="" class="thumbnail">
+    <h1>{{item.title}}</h1>
+    <p>{{item.description}}</p>
+    <p>Giá: {{item.price|intcomma}}</p>
+    {% for image in images %}
+        <img src="{{image.image.url}}" alt="" class="thumbnail">
+    {% endfor %}
+    <form action="" method="get">
+        <button type="submit" name="cart" value="{{item.id}}">Thêm vào giỏ hàng</button>
+    </form>
 </body>
 </html>
