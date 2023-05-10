@@ -13,6 +13,7 @@
             </li>
             {% if request.user.is_authenticated %}
                 <li><p class="welcome">Welcome, {{request.user}}</p></li>
+                <li><a href="" class="func-button fa fa-bell"></a></li>
                 {% if request.user.info.admin %}
                     <li><a href="{% url 'admin' %}" class="func-button fa fa-dashboard"></a></li>
                 {% endif %}
